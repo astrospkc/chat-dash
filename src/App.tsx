@@ -6,6 +6,7 @@ import ChatPage from './Pages/ChatPage'
 import { ChakraProvider } from '@chakra-ui/react'
 import Login from './components/Authentication/Login'
 import SignUp from './components/Authentication/SignUp'
+import { ChatProvider } from './context/ChatProvider'
 function App() {
 
 
@@ -13,18 +14,27 @@ function App() {
     <>
       <div className='bg-black'>
         <ChakraProvider>
+
           <BrowserRouter>
             <Routes>
               <Route path="/" Component={Homepage} />
-              <Route path="/chat" Component={ChatPage} />
-              <Route path="/login" Component={Login} />
-
-              <Route path="/signup" Component={SignUp} />
-
-
             </Routes>
+            <ChatProvider>
+              <Routes>
+                <Route path="/" Component={Homepage} />
+                <Route path="/chat" Component={ChatPage} />
+                <Route path="/login" Component={Login} />
+
+                <Route path="/signup" Component={SignUp} />
+
+
+              </Routes>
+            </ChatProvider>
 
           </BrowserRouter>
+
+
+
 
         </ChakraProvider>
 

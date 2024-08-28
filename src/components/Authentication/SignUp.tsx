@@ -14,7 +14,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch("http://localhost:4000/api/users/register", {
+        const res = await fetch("http://localhost:5000/api/users/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const SignUp = () => {
     return (
         <div className='flex  justify-center items-center w-full h-screen'>
             <div>
-                <h1 className='text-white text-3xl'>Welcome to chat DXV</h1>
+                <h1 className='text-white text-3xl'>Chat-Dash</h1>
                 <form action="submit" onSubmit={handleSubmit}>
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Name</label>
@@ -82,6 +82,13 @@ const SignUp = () => {
 
                     </button>
                 </form>
+                <h1 className='text-white'>Already have an account</h1>
+                <Link to="/login">
+                    <button className='my-3 p-3 w-fit border-2 border-white text-white' >
+                        Login
+
+                    </button>
+                </Link>
 
 
 

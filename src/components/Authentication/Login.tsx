@@ -14,7 +14,7 @@ const Login = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch("http://localhost:4000/api/users/login", {
+        const res = await fetch("http://localhost:5000/api/users/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -23,13 +23,14 @@ const Login = () => {
         })
         const data = await res.json();
         console.log("data: ", data)
+
         if (data.status == 201) {
             console.log("data: ", data)
 
         }
         if (data.success) {
-            console.log("auth token: ", data.authToken);
-            localStorage.setItem("token", data.authToken)
+            console.log("auth token: ", data.authtoken);
+            localStorage.setItem("token", data.authtoken)
             alert("happy logged in ")
             navigate("/chat")
         } else {
@@ -51,7 +52,7 @@ const Login = () => {
         <div className='flex  justify-center items-center w-full h-screen'>
 
             <div>
-                <h1 className='text-white text-3xl'>Welcome to chat DXV</h1>
+                <h1 className='text-white text-3xl'>Chat-Dash</h1>
                 <form action="submit" onSubmit={handleSubmit}>
 
                     <div className='my-4'>
@@ -68,6 +69,14 @@ const Login = () => {
 
                     </button>
                 </form>
+                <h1 className='text-white'>Create Account</h1>
+                <Link to="/signup">
+                    <button className='my-3 p-3 w-fit border-2 border-white text-white' >
+                        Sign Up
+
+                    </button>
+                </Link>
+
 
             </div>
 
