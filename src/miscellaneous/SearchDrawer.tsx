@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
     Drawer,
     DrawerBody,
-    DrawerFooter,
+
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
@@ -13,28 +13,39 @@ import {
     useToast,
     Spinner,
 } from '@chakra-ui/react'
-import { userInfo } from 'os'
+import { UserType } from "../components/types/types"
+
+
 import ChatLoading from '@/components/ChatLoading'
 import { ChatState } from '@/context/ChatProvider'
 import UserListItem from '@/UsersList/UserListItem'
 
+// interface SearchDrawerProps {
+//     _id: string
+//     setSelectedChat: (chat: chatType) => void
+//     chats: chatType[]
+//     setChats: (chats: chatType[]) => void
+// }
+
 const SearchDrawer = () => {
     const [search, setSearch] = useState("")
-    const { user, setSelectedChat, chats, setChats } = ChatState()
+    const { setSelectedChat, chats, setChats, selectedChat } = ChatState()
     // searchresult, loading , loadingchat
-    const [searchResult, setSearchResult] = useState([])
+    const [searchResult, setSearchResult] = useState<UserType[]>([])
     const [loading, setLoading] = useState(false)
     const [loadingChat, setLoadingChat] = useState(false)
 
     const toast = useToast()
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = React.useRef()
+    const btnRef = React.useRef<HTMLButtonElement>(null)
+
+    console.log("selected chat in search drawer: ", selectedChat)
 
     const handleSearch = async () => {
-        console.log("handling search")
+        //console.log("handling search")
         const token = localStorage.getItem("token")
-        console.log("token in search drawer: ", token)
+        //console.log("token in search drawer: ", token)
         if (!token) {
             alert("token is not available , please login")
         }
@@ -62,7 +73,7 @@ const SearchDrawer = () => {
             })
 
             const data = await res.json()
-            console.log("data when searched: ", data)
+            //console.log("data when searched: ", data)
 
             if (chats.length > 0 && !chats.find((chat) => chat._id === data._id)) setChats([...chats, data])
             // if (chats.length == 0 && data) setChats([data])
@@ -88,10 +99,10 @@ const SearchDrawer = () => {
         }
 
     }
-    console.log("chats while adding new chat: ", chats)
+    //console.log("chats while adding new chat: ", chats)
 
 
-    const accessChats = async (userId) => {
+    const accessChats = async (userId: string) => {
         try {
             setLoadingChat(true)
             const token = localStorage.getItem("token")
@@ -114,7 +125,7 @@ const SearchDrawer = () => {
         } catch (error) {
             toast({
                 title: "Error fetching the chat",
-                description: error.message,
+                description: "error",
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -154,7 +165,8 @@ const SearchDrawer = () => {
                                 />
                             ))
                         )}
-                        {loadingChat && <Spinner m="4px" d="flex" />}
+                        {/* {loadingChat && <Spinner m="4px" d="flex" />} */}
+                        {loadingChat && <Spinner m="4px" />}
                     </DrawerBody>
 
 

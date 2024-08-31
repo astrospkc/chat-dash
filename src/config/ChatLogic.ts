@@ -1,6 +1,10 @@
-export const getSender = (loggedUser, users) => {
-    console.log("loggedUser: ", loggedUser)
-    console.log("users: ", users)
+import { UserType, MessageProps } from "../components/types/types"
+
+
+
+export const getSender = (loggedUser: UserType, users: UserType[]) => {
+    //console.log("loggedUser: ", loggedUser)
+    //console.log("users: ", users)
     if (users && loggedUser) {
         return users[0]?._id === loggedUser._id ? users[1]?.name : users[0]?.name
 
@@ -15,9 +19,9 @@ export const getSender = (loggedUser, users) => {
 }
 
 
-export const getSenderFull = (loggedUser, users) => {
-    console.log("loggedUser: ", loggedUser)
-    console.log("users: ", users)
+export const getSenderFull = (loggedUser: UserType, users: UserType[]) => {
+    //console.log("loggedUser: ", loggedUser)
+    //console.log("users: ", users)
     if (users && loggedUser) {
         return users[0]?._id === loggedUser._id ? users[1] : users[0]
 
@@ -29,7 +33,10 @@ export const getSenderFull = (loggedUser, users) => {
 
 }
 
-export const isSameSender = (messages, m, i, userId) => {
+export const isSameSender = (messages: MessageProps[],
+    m: MessageProps,
+    i: number,
+    userId: string) => {
     return (
         i < messages.length - 1 &&
         (messages[i + 1].sender._id !== m.sender._id ||
@@ -38,7 +45,10 @@ export const isSameSender = (messages, m, i, userId) => {
     );
 }
 
-export const isLastMessage = (messages, i, userId) => {
+export const isLastMessage = (messages: MessageProps[],
+
+    i: number,
+    userId: string) => {
     return (
         i === messages.length - 1 &&
         messages[messages.length - 1].sender._id !== userId &&
@@ -46,7 +56,10 @@ export const isLastMessage = (messages, i, userId) => {
     );
 }
 
-export const isSameSenderMargin = (messages, m, i, userId) => {
+export const isSameSenderMargin = (messages: MessageProps[],
+    m: MessageProps,
+    i: number,
+    userId: string) => {
     if (
         i < messages.length - 1 &&
         messages[i + 1].sender._id === m.sender._id &&
@@ -63,6 +76,8 @@ export const isSameSenderMargin = (messages, m, i, userId) => {
     else return "auto";
 };
 
-export const isSameUser = (messages, m, i) => {
+export const isSameUser = (messages: MessageProps[],
+    m: MessageProps,
+    i: number) => {
     return i > 0 && messages[i - 1].sender._id === m.sender._id;
 }

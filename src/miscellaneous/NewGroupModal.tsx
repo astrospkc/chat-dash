@@ -1,27 +1,28 @@
 import React, { useState } from 'react'
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from '@chakra-ui/react'
+import { Button, FormControl, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useToast } from '@chakra-ui/react'
 import { ChatState } from '@/context/ChatProvider'
-import { Divide } from 'lucide-react'
+
 import UserListItem from '@/UsersList/UserListItem'
 import UserBadge from '@/UsersList/UserBadge'
 import debounce from '../miscellaneous/debounce'
+import { UserType } from '@/components/types/types'
 const NewGroupModal = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const initialRef = React.useRef(null)
     const finalRef = React.useRef(null)
     const [groupChatName, setGroupChatName] = useState();
-    const [selectedUser, setSelectedUser] = useState([])
+    const [selectedUser, setSelectedUser] = useState<UserType[]>([])
     // const [search, setSearch] = useState()
     const [searchResult, setSearchResult] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const { user, chats, setChats } = ChatState()
+    const { chats, setChats } = ChatState()
 
     const toast = useToast()
 
 
-    const handleSearch = async (key) => {
+    const handleSearch = async (key: string) => {
         const token = localStorage.getItem("token")
         if (!key) {
             alert("please search user")
@@ -38,7 +39,7 @@ const NewGroupModal = () => {
                 })
 
                 const data = await res.json()
-                console.log("data when searched for group: ", data)
+                //console.log("data when searched for group: ", data)
                 setLoading(false)
                 setSearchResult(data)
             } catch (error) {
@@ -53,7 +54,7 @@ const NewGroupModal = () => {
     }
 
 
-    console.log("search Result: ", searchResult, "selectedUser: ", selectedUser)
+    //console.log("search Result: ", searchResult, "selectedUser: ", selectedUser)
     const handleSubmit = async () => {
         if (!groupChatName || !selectedUser) {
             toast({
@@ -78,7 +79,7 @@ const NewGroupModal = () => {
                 })
             })
             const data = await res.json()
-            console.log("data: ", data)
+            //console.log("data: ", data)
             setChats([data, ...chats])
             onClose()
             toast({
@@ -99,7 +100,7 @@ const NewGroupModal = () => {
 
         }
     }
-    const handleGroup = (userToAdd) => {
+    const handleGroup = (userToAdd: UserType) => {
         if (selectedUser.includes(userToAdd)) {
             toast({
                 title: "user already added",
@@ -111,7 +112,7 @@ const NewGroupModal = () => {
         setSelectedUser([...selectedUser, userToAdd])
     }
 
-    const handleDelete = (delUser) => {
+    const handleDelete = (delUser: UserType) => {
         setSelectedUser(selectedUser.filter((user) => user._id != delUser._id))
     }
 
@@ -127,8 +128,10 @@ const NewGroupModal = () => {
 
 
     return (
-        <div>
-            <Button colorScheme='teal' variant='outline' onClick={onOpen}>New Group chat</Button>
+        <div className=''>
+            {/* <Button colorScheme='teal' variant='outline' onClick={onOpen}>New Group chat</Button> */}
+            <div className='cursor-pointer border-2 border-gray-600 p-2 rounded-xl text-cyan-400 text-sm md:text-base' onClick={onOpen}>New Group chat</div>
+
             {/* <Button ml={4} ref={finalRef}>
                     I'll receive focus on close
                 </Button> */}
@@ -166,7 +169,7 @@ const NewGroupModal = () => {
 
                         {
                             loading ? <div>Loading ... </div> : (
-                                searchResult?.map(user => (
+                                searchResult?.map((user: UserType) => (
                                     <UserListItem
                                         key={user?._id}
                                         user={user}

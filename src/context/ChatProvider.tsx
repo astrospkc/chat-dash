@@ -1,15 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode';
+import { ChatProviderProps, ChatContextType, chatType, UserType } from "../components/types/types"
 
-const ChatContext = createContext("")
 
-const ChatProvider = ({ children }) => {
+const ChatContext = createContext<ChatContextType | undefined>(undefined)
+
+const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     const navigate = useNavigate();
-    const [selectedChat, setSelectedChat] = useState();
-    const [user, setUser] = useState();
-    const [notification, setNotification] = useState([]);
-    const [chats, setChats] = useState([]);
+    const [selectedChat, setSelectedChat] = useState<chatType | null>(null);
+    const [user, setUser] = useState<UserType | undefined>(undefined);
+    // const [notification, setNotification] = useState<notificationType>({});
+    const [chats, setChats] = useState<chatType[]>([]);
 
 
 
@@ -28,7 +29,7 @@ const ChatProvider = ({ children }) => {
         })
         const data = await res.json()
 
-        console.log("userInfo: ", data)
+        //console.log("userInfo: ", data)
         setUser(data)
     }
 
@@ -42,7 +43,7 @@ const ChatProvider = ({ children }) => {
             setUser,
             selectedChat,
             setSelectedChat,
-            notification, setNotification,
+            // notification, setNotification,
             chats, setChats, userInfo
 
         }}>
@@ -52,6 +53,10 @@ const ChatProvider = ({ children }) => {
 }
 
 const ChatState = () => {
-    return useContext(ChatContext)
+    const context = useContext(ChatContext)
+    if (context === undefined) {
+        throw new Error("useChat must be used within a chatProvider")
+    }
+    return context
 }
 export { ChatProvider, ChatState } 

@@ -2,10 +2,15 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+interface InputState {
+    pic?: File | null;
+    username: string;
+    password: string
+}
 const Login = () => {
     const navigate = useNavigate()
-    const [input, setInput] = useState({
-
+    const [input, setInput] = useState<InputState>({
+        pic: null,
         username: "",
 
         password: "",
@@ -22,14 +27,14 @@ const Login = () => {
             body: JSON.stringify(input)
         })
         const data = await res.json();
-        console.log("data: ", data)
+        //console.log("data: ", data)
 
         if (data.status == 201) {
-            console.log("data: ", data)
+            //console.log("data: ", data)
 
         }
         if (data.success) {
-            console.log("auth token: ", data.authtoken);
+            //console.log("auth token: ", data.authtoken);
             localStorage.setItem("token", data.authtoken)
             alert("happy logged in ")
             navigate("/chat")
@@ -40,11 +45,12 @@ const Login = () => {
 
     // const [pic , setPic] = useState()
 
-    const handleInputChange = (e) => {
-        if (e.target.name === 'pic') {
-            setInput({ ...input, [e.target.name]: e.target.files[0] });
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const target = e.target;
+        if (target.name === 'pic' && target.files) {
+            setInput({ ...input, [target.name]: target.files[0] });
         } else {
-            setInput({ ...input, [e.target.name]: e.target.value });
+            setInput({ ...input, [target.name]: target.value });
         }
     };
 

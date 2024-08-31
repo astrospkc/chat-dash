@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Skeleton, Stack } from '@chakra-ui/react'
 
 const ChatLoading = () => {

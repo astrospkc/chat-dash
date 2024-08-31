@@ -1,10 +1,16 @@
-import { Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input } from '@chakra-ui/react'
+
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+interface SignInputState {
+    name: string;
+    username: string;
+    email: string;
+    password: string
 
+}
 const SignUp = () => {
     const navigate = useNavigate()
-    const [input, setInput] = useState({
+    const [input, setInput] = useState<SignInputState>({
         name: "",
         username: "",
         email: "",
@@ -22,13 +28,13 @@ const SignUp = () => {
             body: JSON.stringify(input)
         })
         const data = await res.json();
-        console.log("data: ", data)
+        //console.log("data: ", data)
         if (data.status == 201) {
-            console.log("data: ", data)
+            //console.log("data: ", data)
 
         }
         if (data.success) {
-            console.log("auth token: ", data.authToken);
+            //console.log("auth token: ", data.authToken);
             localStorage.setItem("token", data.authToken)
             alert("happy signed in ")
             navigate("/chat")
@@ -39,16 +45,22 @@ const SignUp = () => {
 
     // const [pic , setPic] = useState()
 
-    const handleInputChange = (e) => {
-        if (e.target.name === 'pic') {
-            setInput({ ...input, [e.target.name]: e.target.files[0] });
-        } else {
-            setInput({ ...input, [e.target.name]: e.target.value });
-        }
+    // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const target = e.target as HTMLInputElement;
+
+    //     if (target.name === 'pic' && target.files) {
+    //         setInput({ ...input, [target.name]: target.files[0] });
+    //     } else {
+    //         setInput({ ...input, [e.target.name]: e.target.value });
+    //     }
+    // };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput({ ...input, [e.target.name]: e.target.value });
     };
 
     const handleClick = () => {
-        console.log("click the button")
+        //console.log("click the button")
     }
     // const isError = input.name === "" || input.username === "" || input.email === "" || input.password === ""
 

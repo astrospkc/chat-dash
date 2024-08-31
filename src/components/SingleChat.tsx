@@ -1,31 +1,39 @@
 import { ChatState } from '@/context/ChatProvider';
-import { FormControl, Input, Spinner, Toast, useToast } from '@chakra-ui/react';
+import { FormControl, Input, Spinner, useToast } from '@chakra-ui/react';
 import { FaArrowLeft } from "react-icons/fa";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getSender, getSenderFull } from '@/config/ChatLogic';
 import ProfileModal from '@/miscellaneous/ProfileModal';
 import UpdateGroupChatModal from '@/miscellaneous/UpdateGroupChatModal';
 import ScrollableChat from '@/UsersList/ScrollableChat';
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
+import { chatType, MessageProps, UserType } from './types/types';
+
+interface SingleChatProps {
+    fetchAgain: boolean
+    setFetchAgain: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const ENDPOINT = "http://localhost:5000";
-let socket, selectedChatCompare;
+let socket: Socket, selectedChatCompare: chatType | null;
 
-const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
+const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
     const { user, selectedChat, setSelectedChat } = ChatState();
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<MessageProps[]>([]);
     const [loading, setLoading] = useState(false);
-    const [newMessage, setNewMessage] = useState("");
+    const [newMessage, setNewMessage] = useState<string>("");
     const [socketConnected, setSocketConnected] = useState(false);
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const toast = useToast();
 
+    console.log("selected Chat: ", selectedChat)
 
-    console.log("user: ", user)
+    // //console.log("user: ", user)
 
     const handleBack = () => {
-        setSelectedChat("");
+        setSelectedChat(null);
+        console.log("selected Chat: after handlling back: ", selectedChat)
     };
 
     const fetchMessage = async () => {
@@ -56,7 +64,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
 
     useEffect(() => {
         socket = io(ENDPOINT);
-        console.log("user for socket: ", user)
+        //console.log("user for socket: ", user)
 
         socket.emit("setup", user);
 
@@ -73,9 +81,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
     });
 
     useEffect(() => {
-        socket.on("message received", (newMessageReceived) => {
+        socket.on("message received", (newMessageReceived: MessageProps) => {
             if (!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
                 // give notification
+                // if (!notification.includes(newMessageReceived)) {
+                //     setNotification([newMessageReceived, ...notification])
+                // }
             } else {
                 setMessages((prevMessages) => [...prevMessages, newMessageReceived]);
             }
@@ -91,7 +102,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         selectedChatCompare = selectedChat;
     }, [selectedChat]);
 
-    const sendMessage = async (event) => {
+    const sendMessage = async (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter" && newMessage) {
             try {
                 const token = localStorage.getItem("token");
@@ -103,7 +114,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
                         Authorization: `Bearer ${token}`
                     },
                     body: JSON.stringify({
-                        chatId: selectedChat._id,
+                        chatId: selectedChat?._id,
                         content: newMessage
                     })
                 });
@@ -123,21 +134,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
         }
     };
 
-    const typingHandler = (e) => {
-        setNewMessage(e.target.value);
+    const typingHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+        setNewMessage(target.value);
         if (!socketConnected) return;
 
         if (!typing) {
             setTyping(true);
-            socket.emit("typing", selectedChat._id);
+            socket.emit("typing", selectedChat?._id);
         }
-        let lastTypingTime = new Date().getTime();
-        let timerLength = 3000;
+        const lastTypingTime = new Date().getTime();
+        const timerLength = 3000;
         setTimeout(() => {
-            let timeNow = new Date().getTime();
-            let timeDiff = timeNow - lastTypingTime;
+            const timeNow = new Date().getTime();
+            const timeDiff = timeNow - lastTypingTime;
             if (timeDiff >= timerLength && typing) {
-                socket.emit("stop typing", selectedChat._id);
+                socket.emit("stop typing", selectedChat?._id);
                 setTyping(false);
             }
         }, timerLength);
@@ -152,14 +164,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
                         {messages && selectedChat.isGroupChat ? (
                             <div className='flex flex-row justify-between'>
                                 <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{selectedChat.chatName.toUpperCase()}</div>
-                                <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} fetchMessages={fetchMessages} />
+                                <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} fetchMessage={fetchMessage} />
                             </div>
-                        ) : (
-                            < div className='flex flex-row justify-between'>
-                                <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{getSender(user, selectedChat.users)}</div>
-                                <ProfileModal user={getSenderFull(user, selectedChat.users)} />
-                            </div>
+                        ) : (<>
+                            {user &&
+                                < div className='flex flex-row justify-between'>
+                                    <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{getSender(user, selectedChat.users) || 'Unknown'}</div>
+                                    <ProfileModal user={getSenderFull(user, selectedChat?.users) as UserType} />
+
+
+                                </div>
+                            }
+
+
+                        </>
                         )}
+
                     </div>
                     <div className='text-white flex flex-grow overflow-y-scroll flex-col flex-end'>
                         {loading ? (

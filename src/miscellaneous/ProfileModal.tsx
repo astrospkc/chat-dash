@@ -1,8 +1,14 @@
+import { UserType } from '@/components/types/types';
 import { Avatar, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import React from 'react'
+
 import { FaEye } from "react-icons/fa";
 
-const ProfileModal = ({ user }) => {
+interface ModalProps {
+    user: UserType
+}
+
+
+const ProfileModal = ({ user }: ModalProps) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     // const handleClick = () => {
 

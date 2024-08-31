@@ -1,6 +1,13 @@
-import React from 'react'
+
 import { Avatar } from '@chakra-ui/react'
-const UserListItem = ({ user, handleFn }) => {
+import { UserType } from "../components/types/types"
+
+interface UserListItemProps {
+    user: UserType;
+    handleFn: () => void
+}
+
+const UserListItem: React.FC<UserListItemProps> = ({ user, handleFn }) => {
     return (
         <div onClick={handleFn} className='my-4 border-2 border-gray-300 p-2 bg-gray-700 shadow-xl shadow-black text-white hover:scale-105 hover:cursor-pointer hover:bg-gray-400 rounded-xl'>
             <div className='flex flex-row items-center gap-2'>

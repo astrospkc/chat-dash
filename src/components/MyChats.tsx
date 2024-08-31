@@ -3,17 +3,23 @@ import { ChatState } from '@/context/ChatProvider'
 import NewGroupModal from '@/miscellaneous/NewGroupModal'
 import { Box, Stack, Text, useToast } from '@chakra-ui/react'
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ChatLoading from './ChatLoading'
+import { UserType } from './types/types'
+interface MyChatsProps {
+    fetchAgain: boolean
+    // user: UserType
+}
 
-const MyChats = ({ fetchAgain }) => {
+
+const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
 
 
 
-    const [loggedUser, setLoggedUser] = useState()
+    const [loggedUser, setLoggedUser] = useState<UserType | undefined>(undefined)
     const { selectedChat, setSelectedChat, chats, setChats, user } = ChatState()
-    console.log("user: ", user)
-    console.log("selectedChat: ", selectedChat)
+    //console.log("user: ", user)
+    //console.log("selectedChat: ", selectedChat)
 
 
 
@@ -30,7 +36,7 @@ const MyChats = ({ fetchAgain }) => {
                 // body: JSON.stringify(selected)
             })
             const data = await res.json()
-            console.log("data: ", data)
+            //console.log("data: ", data)
             setChats(data)
 
         } catch (error) {
@@ -54,19 +60,20 @@ const MyChats = ({ fetchAgain }) => {
         setLoggedUser(user)
         fetchChats()
     }, [user, fetchAgain])
-    console.log("logged user: ", loggedUser)
-    console.log("chats: ", chats)
+    //console.log("logged user: ", loggedUser)
+    //console.log("chats: ", chats)
     return (
-        <div className='flex flex-col'>
-            <div className='flex flex-row justify-around gap-5 my-4 ml-1'>
+        <div className='flex flex-col w-full'>
+            <div className='flex flex-row justify-around gap-5 my-4 ml-1 w-full'>
                 <h1 className=' text-white'>My Chats</h1>
                 <NewGroupModal />
             </div>
             <div>
-                {chats ? (
-                    <Stack overflowY="scroll">
-                        hi there
-                        {chats.map((chat) => (
+                <Stack overflowY="scroll">
+                    {chats ?
+
+
+                        chats.map((chat) => (
                             <Box
                                 onClick={() => setSelectedChat(chat)}
                                 cursor="pointer"
@@ -81,16 +88,16 @@ const MyChats = ({ fetchAgain }) => {
                                 <Text
                                     m={4}>
 
-                                    {!chat.isGroupChat ? getSender(loggedUser, chat.users) : chat.chatName}
+                                    {!chat.isGroupChat && loggedUser ? getSender(loggedUser, chat.users) : chat.chatName}
                                 </Text>
 
                             </Box>
-                        ))}
+                        )
 
-                    </Stack>
-                ) :
-                    <ChatLoading />
-                }
+
+                        ) :
+                        <ChatLoading />
+                    }</Stack>
             </div>
 
 
