@@ -29,7 +29,7 @@ import UserListItem from '@/UsersList/UserListItem'
 
 const SearchDrawer = () => {
     const [search, setSearch] = useState("")
-    const { setSelectedChat, chats, setChats, selectedChat } = ChatState()
+    const { chats, setChats, selectedChat } = ChatState()
     // searchresult, loading , loadingchat
     const [searchResult, setSearchResult] = useState<UserType[]>([])
     const [loading, setLoading] = useState(false)
