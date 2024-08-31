@@ -14,7 +14,7 @@ interface SingleChatProps {
     setFetchAgain: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://chat-dash-backend-1.onrender.com";
 let socket: Socket, selectedChatCompare: chatType | null;
 
 const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
