@@ -26,9 +26,7 @@ import SearchDrawer from '@/miscellaneous/SearchDrawer';
 import MyChats from '@/components/MyChats';
 import ChatBox from '@/components/ChatBox';
 import { FaBell } from "react-icons/fa6";
-// import { getSender } from '@/config/ChatLogic';
-// import NotificationBadge from 'react-notification-badge';
-// import { Effect } from 'react-notification-badge';
+
 
 
 
