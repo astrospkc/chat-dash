@@ -32,11 +32,18 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
     const [renameLoading, setRenameLoading] = useState(false)
     const { selectedChat, user, setSelectedChat } = ChatState()
     //console.log("selectedChat in updategroupchatmodel: ", selectedChat)
-    const groupName = selectedChat?.chatName.toUpperCase()
+    const groupName = selectedChat?.chatName && selectedChat?.chatName.toUpperCase()
+    console.log("search: ", search)
 
     const handleRemove = async (user1: UserType) => {
         //console.log("user1 to remove: ", user1)
-        if (selectedChat?.groupAdmin._id !== user?._id && user1?._id !== user?._id) {
+        if (
+            selectedChat &&
+            selectedChat.groupAdmin &&
+            selectedChat.groupAdmin._id !== user?._id &&
+            user1 &&
+            user1._id !== user?._id
+        ) {
             toast({
                 title: "Only admins can remove someone",
                 status: "error",
@@ -87,7 +94,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
     }
 
     const handleAddUser = async (user1: UserType) => {
-        if (selectedChat?.users.find((u) => u._id === user1._id)) {
+        if (selectedChat && selectedChat.users && selectedChat?.users.find((u) => u._id === user1._id)) {
             toast({
                 title: "User already in group",
                 status: "error",
@@ -97,7 +104,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
             return;
         }
 
-        if (selectedChat?.groupAdmin._id !== user?._id) {
+        if (selectedChat && selectedChat.groupAdmin && selectedChat.groupAdmin._id && selectedChat?.groupAdmin._id !== user?._id) {
             toast({
                 title: "only admins can add someone",
                 status: "error",
@@ -223,7 +230,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
                             <div className='flex flex-col gap-2'>
 
                                 <div className='flex flex-row gap-2'>
-                                    {selectedChat?.users.map((u) => {
+                                    {selectedChat && selectedChat.users && selectedChat?.users?.map((u) => {
                                         return (
                                             <UserBadge
                                                 key={u._id}

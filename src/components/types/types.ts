@@ -8,12 +8,12 @@ export interface UserType {
 
 }
 export interface chatType {
-    _id: string | "";
-    chatName: string | "";
-    isGroupChat: boolean | false;
-    users: UserType[];
-    latestMessage: string | "";
-    groupAdmin: UserType;
+    _id?: string;
+    chatName?: string;
+    isGroupChat?: boolean;
+    users?: UserType[];
+    latestMessage?: string;
+    groupAdmin?: UserType;
 }
 export interface notificationType {
     [key: string]: any;

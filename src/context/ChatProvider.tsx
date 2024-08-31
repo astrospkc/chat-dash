@@ -7,7 +7,21 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     const navigate = useNavigate();
-    const [selectedChat, setSelectedChat] = useState<chatType | null>(null);
+    const [selectedChat, setSelectedChat] = useState<chatType>({
+        _id: "",
+        chatName: "",
+        isGroupChat: false,
+        users: [],
+        latestMessage: "",
+        groupAdmin: {
+            _id: "",
+            name: "",
+            username: "",
+            email: "",
+            password: "",
+            pic: "",
+        },
+    });
     const [user, setUser] = useState<UserType | undefined>(undefined);
     // const [notification, setNotification] = useState<notificationType>({});
     const [chats, setChats] = useState<chatType[]>([]);

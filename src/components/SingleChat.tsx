@@ -32,7 +32,21 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
     // //console.log("user: ", user)
 
     const handleBack = () => {
-        setSelectedChat(null);
+        setSelectedChat({
+            _id: "",
+            chatName: "",
+            isGroupChat: false,
+            users: [],
+            latestMessage: "",
+            groupAdmin: {
+                _id: "",
+                name: "",
+                username: "",
+                email: "",
+                password: "",
+                pic: "",
+            },
+        });
         console.log("selected Chat: after handlling back: ", selectedChat)
     };
 
@@ -161,13 +175,13 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
                 <div className='flex flex-col m-5 w-full'>
                     <div>
                         <FaArrowLeft onClick={handleBack} className='text-white md:hidden hover:cursor-pointer scale-90' />
-                        {messages && selectedChat.isGroupChat ? (
+                        {messages && selectedChat.isGroupChat && selectedChat.chatName ? (
                             <div className='flex flex-row justify-between'>
                                 <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{selectedChat.chatName.toUpperCase()}</div>
                                 <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} fetchMessage={fetchMessage} />
                             </div>
                         ) : (<>
-                            {user &&
+                            {user && selectedChat && selectedChat.users &&
                                 < div className='flex flex-row justify-between'>
                                     <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{getSender(user, selectedChat.users) || 'Unknown'}</div>
                                     <ProfileModal user={getSenderFull(user, selectedChat?.users) as UserType} />

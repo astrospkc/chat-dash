@@ -101,7 +101,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
                                     <Text
                                         m={4}>
 
-                                        {!chat.isGroupChat && loggedUser ? getSender(loggedUser, chat.users) : chat.chatName}
+                                        {!chat.isGroupChat && loggedUser ? getSender(loggedUser, chat.users || []) : chat.chatName}
                                     </Text>
 
 
