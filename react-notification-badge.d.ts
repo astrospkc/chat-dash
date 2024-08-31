@@ -4,7 +4,7 @@
 //         SCALE = 'scale'
 //     }
 
-//     interface NotificationBadgeProps {
+//     interface //console.logProps {
 //         count: number;
 //         max?: number;
 //         style?: React.CSSProperties;
@@ -13,6 +13,6 @@
 //         // Add other props as needed
 //     }
 
-//     export class NotificationBadge extends Component<NotificationBadgeProps> { }
-//     export default NotificationBadge;
+//     export class //console.log extends Component<//console.logProps> { }
+//     export default //console.log;
 // }
