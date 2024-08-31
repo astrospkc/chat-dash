@@ -87,14 +87,14 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
                 <h1 className=' text-white'>My Chats</h1>
                 <NewGroupModal />
             </div>
-            <div>
+            <div className="overflow-y-scroll">
                 <Stack overflowY="scroll">
                     {chats ?
                         chats.map((chat) => (
                             <div key={chat._id} className='flex flex-row items-center'>
                                 <div
                                     onClick={() => setSelectedChat(chat)}
-                                    className={`${selectedChat === chat ? "bg-gradient-to-r from-violet-800 to-blue-400" : "bg-gradient-to-r from-gray-800 to-blue-400"} text-white w-full rounded-xl cursor-pointer flex flex-row justify-between gap-5 my-4 ml-1 scale-75 hover:scale-90`}
+                                    className={`${selectedChat === chat ? "bg-gradient-to-r from-violet-800 to-blue-400" : "bg-gradient-to-r from-gray-800 to-blue-400"} text-white w-full rounded-xl cursor-pointer flex flex-row justify-between  gap-5 my-4 ml-1  scale-75 hover:scale-90`}
 
 
                                 >

@@ -11,9 +11,9 @@ const Login = () => {
     const navigate = useNavigate()
     const [input, setInput] = useState<InputState>({
         pic: null,
-        username: "",
+        username: "@rita",
 
-        password: "",
+        password: "rita@",
 
     })
 

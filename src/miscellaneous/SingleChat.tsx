@@ -69,7 +69,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
         } catch (error) {
             console.error("Error fetching messages:", error);
             toast({
-                title: "Failed to load messages",
+                title: "//console.logload messages",
                 status: "error",
                 duration: 3000,
                 isClosable: true
@@ -140,7 +140,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
             } catch (error) {
                 console.error("Error sending message:", error);
                 toast({
-                    title: "Failed to send message",
+                    title: "//console.logsend message",
                     status: "error",
                     duration: 3000,
                     isClosable: true
