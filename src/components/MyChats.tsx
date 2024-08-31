@@ -1,11 +1,13 @@
 import { getSender } from '@/config/ChatLogic'
 import { ChatState } from '@/context/ChatProvider'
 import NewGroupModal from '@/miscellaneous/NewGroupModal'
-import { Box, Stack, Text, useToast } from '@chakra-ui/react'
+import { Stack, Text, useToast } from '@chakra-ui/react'
 
 import { useEffect, useState } from 'react'
 import ChatLoading from './ChatLoading'
 import { UserType } from './types/types'
+// import { BsThreeDotsVertical } from "react-icons/bs";
+
 interface MyChatsProps {
     fetchAgain: boolean
     // user: UserType
@@ -36,7 +38,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
                 // body: JSON.stringify(selected)
             })
             const data = await res.json()
-            //console.log("data: ", data)
+            console.log("data in myychats: ", data)
             setChats(data)
 
         } catch (error) {
@@ -62,6 +64,23 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
     }, [user, fetchAgain])
     //console.log("logged user: ", loggedUser)
     //console.log("chats: ", chats)
+
+    // const RemoveUser = (chatId) => {
+    //     console.log("chatId clicked: ", chatId)
+    //     const chatToRemove = chats.findIndex(() => chats.includes(chatId))
+    //     if (chatToRemove !== -1) {
+    //         chats.splice(chatToRemove, 1)
+    //     }
+
+    // }
+
+    // useEffect(() => {
+    //     setChats(chats)
+    // }, [chats])
+
+    // console.log("chats in the my chats: ", chats)
+
+
     return (
         <div className='flex flex-col w-full'>
             <div className='flex flex-row justify-around gap-5 my-4 ml-1 w-full'>
@@ -71,27 +90,35 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
             <div>
                 <Stack overflowY="scroll">
                     {chats ?
-
-
                         chats.map((chat) => (
-                            <Box
-                                onClick={() => setSelectedChat(chat)}
-                                cursor="pointer"
-                                key={chat._id}
-                                bg={selectedChat === chat ? "#38b2ac" : "#E8E8E8"}
-                                color={selectedChat === chat ? "white" : "black"}
-                                px={3}
-                                py={2}
-                                borderRadius="lg"
+                            <div key={chat._id} className='flex flex-row items-center'>
+                                <div
+                                    onClick={() => setSelectedChat(chat)}
+                                    className={`${selectedChat === chat ? "bg-gradient-to-r from-violet-800 to-blue-400" : "bg-gradient-to-r from-gray-800 to-blue-400"} text-white w-full rounded-xl cursor-pointer flex flex-row justify-between gap-5 my-4 ml-1 scale-75 hover:scale-90`}
 
-                            >
-                                <Text
-                                    m={4}>
 
-                                    {!chat.isGroupChat && loggedUser ? getSender(loggedUser, chat.users) : chat.chatName}
-                                </Text>
+                                >
+                                    <Text
+                                        m={4}>
 
-                            </Box>
+                                        {!chat.isGroupChat && loggedUser ? getSender(loggedUser, chat.users) : chat.chatName}
+                                    </Text>
+
+
+                                </div>
+                                {/* <Menu>
+                                    <MenuButton >
+                                        <BsThreeDotsVertical className='text-white rounded-full w-fit  hover:border-2 border-gray-500 hover:cursor-pointer' />
+
+                                    </MenuButton>
+                                    <MenuList>
+                                        <MenuItem className='hover:bg-black hover:text-white' onClick={RemoveUser(chat?._id)}>Remove</MenuItem>
+
+                                    </MenuList>
+                                </Menu> */}
+
+                            </div>
+
                         )
 
 

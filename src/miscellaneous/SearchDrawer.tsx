@@ -116,8 +116,9 @@ const SearchDrawer = () => {
             })
             const data = await res.json()
             console.log("user when selected from side drawer: ", data)
-            setSelectedChat(data)
-            setChats([data]) //experimentings
+            // setSelectedChat(data)
+            setChats([data, ...chats]) //experimentings
+            console.log("chts: ", chats)
             setLoadingChat(false)
             onClose()
 
