@@ -63,12 +63,12 @@ const Login = () => {
 
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Username</label>
-                        <input type="text" name='username' onChange={handleInputChange} className='p-3 w-full' />
+                        <input type="text" name='username' onChange={handleInputChange} value={input.username} className='text-black p-3 w-full' />
                     </div>
 
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Password</label>
-                        <input type="password" name='password' onChange={handleInputChange} className='p-3 w-full' />
+                        <input type="password" name='password' onChange={handleInputChange} value={input.password} className='p-3 w-full' />
                     </div>
                     <button className='my-3 p-3 w-fit border-2 border-white text-white' type='submit'>
                         Submit
