@@ -7,7 +7,7 @@ import ProfileModal from '@/miscellaneous/ProfileModal';
 import UpdateGroupChatModal from '@/miscellaneous/UpdateGroupChatModal';
 import ScrollableChat from '@/UsersList/ScrollableChat';
 import io, { Socket } from "socket.io-client";
-import { chatType, MessageProps, UserType } from './types/types';
+import { chatType, MessageProps, UserType } from '../components/types/types';
 
 interface SingleChatProps {
     fetchAgain: boolean

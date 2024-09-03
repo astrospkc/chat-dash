@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -9,6 +10,7 @@ interface InputState {
 }
 const Login = () => {
     const navigate = useNavigate()
+    const [loginLoad, setLoginLoad] = useState(false)
     const [input, setInput] = useState<InputState>({
         pic: null,
         username: "@rita",
@@ -20,6 +22,7 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         console.log(import.meta.env.VITE_URL, import.meta.env.KEY)
+        setLoginLoad(true)
         const res = await fetch(`${import.meta.env.VITE_URL}/api/users/login`, {
             method: "POST",
             headers: {
@@ -38,10 +41,12 @@ const Login = () => {
             //console.log("auth token: ", data.authtoken);
             localStorage.setItem("token", data.authtoken)
             alert("happy logged in ")
+
             navigate("/chat")
         } else {
             alert("invalid credentials")
         }
+        setLoginLoad(false)
     }
 
     // const [pic , setPic] = useState()
@@ -62,15 +67,15 @@ const Login = () => {
             <div>
                 <h1 className='text-white text-3xl'>Chat-Dash</h1>
                 <form action="submit" onSubmit={handleSubmit}>
-
+                    {loginLoad && <div>...loading</div>}
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Username</label>
-                        <input type="text" name='username' onChange={handleInputChange} value={input.username} placeholder='@rita' className='text-black p-3 w-full' />
+                        <input type="text" name='username' onChange={handleInputChange} value={input.username} defaultValue='@rita' className='text-black p-3 w-full' />
                     </div>
 
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Password</label>
-                        <input type="password" name='password' onChange={handleInputChange} value={input.password} placeholder='rita@' className='p-3 w-full' />
+                        <input type="password" name='password' onChange={handleInputChange} value={input.password} defaultValue='rita@' className='p-3 w-full' />
                     </div>
                     <button className='my-3 p-3 w-fit border-2 border-white text-white' type='submit'>
                         Submit
