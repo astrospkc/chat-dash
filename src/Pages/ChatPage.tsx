@@ -142,11 +142,11 @@ const ChatPage = () => {
             </div>
             <div className='bg-gray-900 flex flex-row  h-full'>
 
-                <div className={`${selectedChat ? 'hidden' : 'block'} md:flex  w-full md:w-1/4 p-4 shadow-lg shadow-black`}>
+                <div className={`${selectedChat && selectedChat._id == "" ? 'hidden' : 'block'} md:flex  w-full md:w-1/4 p-4 shadow-lg shadow-black`}>
                     <MyChats fetchAgain={fetchAgain} />
                 </div>
 
-                <div className={`${selectedChat ? "block" : "hidden"} md:${selectedChat && "block"} w-full h-full`}>
+                <div className={`${selectedChat && selectedChat._id == "" ? "block" : "hidden"} md:${selectedChat && "block"} w-full h-full`}>
                     <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} /></div>
             </div>
         </div>
