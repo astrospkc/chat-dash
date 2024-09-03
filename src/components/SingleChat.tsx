@@ -51,21 +51,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
     };
 
     const handleBack = () => {
-        // setSelectedChat({
-        //     _id: null,
-        //     chatName: null,
-        //     isGroupChat: false,
-        //     users: null,
-        //     latestMessage: null,
-        //     groupAdmin: {
-        //         _id: null,
-        //         name: null,
-        //         username: null,
-        //         email: null,
-        //         password: null,
-        //         pic: null
-        //     },
-        // });
+
         setSelectedChat(nullChat)
 
         console.log("selected Chat: after handlling back: ", selectedChat)
@@ -193,7 +179,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
 
     return (
         <div className='flex h-full'>
-            {selectedChat && selectedChat._id != "" ? (
+            {selectedChat && selectedChat._id != null ? (
                 <div className='flex flex-col m-5 w-full'>
                     <div>
                         <FaArrowLeft onClick={handleBack} className='text-white md:hidden hover:cursor-pointer scale-90' />
@@ -203,7 +189,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
                                 <UpdateGroupChatModal fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} fetchMessage={fetchMessage} />
                             </div>
                         ) : (<>
-                            {user && selectedChat && selectedChat.users && selectedChat.users.length > 0 &&
+                            {user && selectedChat && selectedChat.users != null && selectedChat.users.length > 0 &&
                                 < div className='flex flex-row justify-between'>
                                     <div className='text-white w-fit px-3 py-1 rounded-xl bg-gradient-to-r from-purple-950 to-cyan-800 font-bold'>{getSender(user, selectedChat.users)}</div>
                                     <ProfileModal user={getSenderFull(user, selectedChat?.users) as UserType} />

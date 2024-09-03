@@ -67,7 +67,7 @@ const Login = () => {
             <div>
                 <h1 className='text-white text-3xl'>Chat-Dash</h1>
                 <form action="submit" onSubmit={handleSubmit}>
-                    {loginLoad && <div>...loading</div>}
+                    {loginLoad && <div className='text-white'>...loading</div>}
                     <div className='my-4'>
                         <label htmlFor="name" className='my-3 text-white'>Username</label>
                         <input type="text" name='username' onChange={handleInputChange} value={input.username} defaultValue='@rita' className='text-black p-3 w-full' />
