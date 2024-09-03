@@ -146,7 +146,7 @@ const ChatPage = () => {
                     <MyChats fetchAgain={fetchAgain} />
                 </div>
 
-                <div className={`${selectedChat && selectedChat._id == "" ? "block" : "hidden"} md:${selectedChat && "block"} w-full h-full`}>
+                <div className={`${selectedChat && selectedChat._id != "" ? "block" : "hidden"} md:${selectedChat && "block"} w-full h-full`}>
                     <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} /></div>
             </div>
         </div>
