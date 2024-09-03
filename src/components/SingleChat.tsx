@@ -17,6 +17,7 @@ interface SingleChatProps {
 
 
 const ENDPOINT = "https://chat-dash-backend-1.onrender.com";
+// const ENDPOINT = "http://localhost:5000"
 let socket: Socket, selectedChatCompare: chatType | null;
 
 const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) => {
