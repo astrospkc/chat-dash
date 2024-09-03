@@ -1,19 +1,19 @@
 export interface UserType {
-    _id: string | null;
-    name: string | null;
-    username: string | null;
-    email: string | null;
-    password: string | null;
-    pic: string | null;
+    _id: string;
+    name: string | undefined;
+    username: string | undefined;
+    email: string | undefined;
+    password: string | undefined;
+    pic: string | undefined;
 
 }
 export interface chatType {
-    _id?: string | null;
-    chatName?: string | null;
+    _id?: string;
+    chatName?: string;
     isGroupChat?: boolean | false;
-    users?: UserType[] | null;
-    latestMessage?: string | null;
-    groupAdmin?: UserType | null;
+    users?: UserType[];
+    latestMessage?: string;
+    groupAdmin?: UserType;
 }
 export interface notificationType {
     [key: string]: any;
@@ -23,7 +23,7 @@ export interface notificationType {
 export interface ChatContextType {
     user: UserType | undefined;
     setUser: (user: UserType) => void;
-    selectedChat: chatType | null;
+    selectedChat: chatType;
     setSelectedChat: (chat: chatType) => void;
     // notification: notificationType;
     // setNotification: (notification: notificationType) => void;

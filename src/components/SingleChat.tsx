@@ -34,25 +34,25 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
     console.log("selected Chat: ", selectedChat)
 
     // //console.log("user: ", user)
-    const nullChat: chatType = {
-        _id: null,
-        chatName: null,
-        isGroupChat: false,
-        users: null,
-        latestMessage: null,
-        groupAdmin: {
-            _id: null,
-            name: null,
-            username: null,
-            email: null,
-            password: null,
-            pic: null
-        }
-    };
+
 
     const handleBack = () => {
 
-        setSelectedChat(nullChat)
+        setSelectedChat({
+            _id: "",
+            chatName: "",
+            isGroupChat: false,
+            users: [],
+            latestMessage: "",
+            groupAdmin: {
+                _id: "",
+                name: "",
+                username: "",
+                email: "",
+                password: "",
+                pic: ""
+            }
+        })
 
         console.log("selected Chat: after handlling back: ", selectedChat)
     };
