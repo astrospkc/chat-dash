@@ -34,23 +34,40 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
     console.log("selected Chat: ", selectedChat)
 
     // //console.log("user: ", user)
+    const nullChat: chatType = {
+        _id: null,
+        chatName: null,
+        isGroupChat: false,
+        users: null,
+        latestMessage: null,
+        groupAdmin: {
+            _id: null,
+            name: null,
+            username: null,
+            email: null,
+            password: null,
+            pic: null
+        }
+    };
 
     const handleBack = () => {
-        setSelectedChat({
-            _id: "",
-            chatName: "",
-            isGroupChat: false,
-            users: [],
-            latestMessage: "",
-            groupAdmin: {
-                _id: "",
-                name: "",
-                username: "",
-                email: "",
-                password: "",
-                pic: "",
-            },
-        });
+        // setSelectedChat({
+        //     _id: null,
+        //     chatName: null,
+        //     isGroupChat: false,
+        //     users: null,
+        //     latestMessage: null,
+        //     groupAdmin: {
+        //         _id: null,
+        //         name: null,
+        //         username: null,
+        //         email: null,
+        //         password: null,
+        //         pic: null
+        //     },
+        // });
+        setSelectedChat(nullChat)
+
         console.log("selected Chat: after handlling back: ", selectedChat)
     };
 
@@ -176,7 +193,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
 
     return (
         <div className='flex h-full'>
-            {selectedChat ? (
+            {selectedChat && selectedChat._id != "" ? (
                 <div className='flex flex-col m-5 w-full'>
                     <div>
                         <FaArrowLeft onClick={handleBack} className='text-white md:hidden hover:cursor-pointer scale-90' />
