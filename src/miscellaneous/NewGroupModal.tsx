@@ -30,7 +30,7 @@ const NewGroupModal = () => {
 
             try {
                 setLoading(true)
-                const res = await fetch(`http://localhost:5000/api/users?search=${key}`, {
+                const res = await fetch(`${import.meta.env.VITE_URL}/api/users?search=${key}`, {
                     method: "GET",
                     headers: {
                         "Content-type": "application/json",
@@ -67,7 +67,7 @@ const NewGroupModal = () => {
         }
         try {
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats/group/creategroup", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/group/creategroup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

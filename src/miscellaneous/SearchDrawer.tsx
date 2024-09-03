@@ -64,7 +64,7 @@ const SearchDrawer = () => {
         try {
             setLoading(true)
 
-            const res = await fetch(`http://localhost:5000/api/users?search=${search}`, {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/users?search=${search}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json",
@@ -106,7 +106,7 @@ const SearchDrawer = () => {
         try {
             setLoadingChat(true)
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",

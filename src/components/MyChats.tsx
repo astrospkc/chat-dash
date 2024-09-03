@@ -18,6 +18,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
 
 
 
+
     const [loggedUser, setLoggedUser] = useState<UserType | undefined>(undefined)
     const { selectedChat, setSelectedChat, chats, setChats, user } = ChatState()
     //console.log("user: ", user)
@@ -29,7 +30,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
     const fetchChats = async () => {
         try {
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats/fetchChat", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/fetchChat`, {
                 method: "GET",
                 headers: {
                     // "Content-Type": "application/json",

@@ -20,7 +20,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch("http://localhost:5000/api/users/register", {
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/users/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

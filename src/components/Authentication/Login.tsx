@@ -19,7 +19,8 @@ const Login = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch("http://localhost:5000/api/users/login", {
+        console.log(import.meta.env.VITE_URL, import.meta.env.KEY)
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/users/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -53,6 +54,7 @@ const Login = () => {
             setInput({ ...input, [target.name]: target.value });
         }
     };
+    console.log(import.meta.env.URL, import.meta.env.KEY)
 
     return (
         <div className='flex  justify-center items-center w-full h-screen'>

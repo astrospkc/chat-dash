@@ -56,7 +56,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
         try {
             setLoading(true);
             const token = localStorage.getItem("token");
-            const res = await fetch(`http://localhost:5000/api/messages/allMessage/${selectedChat._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/messages/allMessage/${selectedChat._id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -122,7 +122,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
             try {
                 const token = localStorage.getItem("token");
                 setNewMessage("");
-                const res = await fetch("http://localhost:5000/api/messages/sendMessage", {
+                const res = await fetch(`${import.meta.env.VITE_URL}/api/messages/sendMessage`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

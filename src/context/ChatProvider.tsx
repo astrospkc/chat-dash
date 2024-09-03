@@ -6,6 +6,8 @@ import { ChatProviderProps, ChatContextType, chatType, UserType } from "../compo
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+
+
     const navigate = useNavigate();
     const [selectedChat, setSelectedChat] = useState<chatType>({
         _id: "",
@@ -34,7 +36,7 @@ const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
             alert('first login please, token is not generated')
             navigate("/")
         }
-        const res = await fetch("http://localhost:5000/api/users/userInfo", {
+        const res = await fetch(`${import.meta.env.VITE_URL}/api/users/userInfo`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

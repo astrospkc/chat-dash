@@ -57,7 +57,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
         try {
             setLoading(true)
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats/group/removeMember", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/group/removeMember`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
         try {
             setLoading(true)
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats/group/addMember", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/group/addMember`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -148,7 +148,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
         try {
             setRenameLoading(true)
             const token = localStorage.getItem("token")
-            const res = await fetch("http://localhost:5000/api/chats/group/renamegroup", {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/group/renamegroup`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -184,7 +184,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
         try {
             setLoading(true)
             const token = localStorage.getItem("token")
-            const res = await fetch(`http://localhost:5000/api/users?search=${value}`, {
+            const res = await fetch(`${import.meta.env.VITE_URL}/api/users?search=${value}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
