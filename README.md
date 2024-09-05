@@ -1,5 +1,5 @@
 # CHAT-DASH APP
-![](https://chat-dash-gamma.vercel.app/)
+![website](https://chat-dash-gamma.vercel.app/)
 
 ![THE CHAT PAGE](images/chatApp.png)
 
