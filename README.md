@@ -1,3 +1,40 @@
+# CHAT-DASH APP
+
+![THE CHAT PAGE](images/chatApp.png)
+
+##*Tech used*
+- Reactjs ( ==npm create vite@latest appname==)
+- Tailwind css (==npm install -D tailwindcss postcss autoprefixer== 
+==npx tailwindcss init -p==)
+- Chakra ui
+- Socket.io
+- nodejs
+- expressjs
+- mongoose
+- react icons
+- javascript and typescript
+
+##*Know the app*
+*The very idea of this app to chat in real time , whether its a group or a single member.
+> ###***Functionality***
+- ==Create a chat== : basically add friend and create the first chat.
+- ==Create a group chat== : create a group chat , search and add the members
+- ==Search member==
+- ==chat in real time==
+- ==remove member from the group==
+- ==edit group chat name and members==
+
+
+
+
+
+
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -49,6 +86,4 @@ export default tseslint.config({
 })
 ```
 
-# CHAT-DASH APP
 
-![THE CHAT PAGE](images/chatApp.png)
