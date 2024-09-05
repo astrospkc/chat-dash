@@ -51,4 +51,4 @@ export default tseslint.config({
 
 # CHAT-DASH APP
 
-![THE CHAT PAGE](images/chat.png)
+![THE CHAT PAGE](images/chatApp.png)
