@@ -44,7 +44,7 @@ const SearchDrawer = () => {
 
     const handleSearch = async () => {
         ////console.log"handling search")
-        const token = localStorage.getItem("token")i
+        const token = localStorage.getItem("token")
         ////console.log"token in search drawer: ", token)
         if (!token) {
             alert("token is not available , please login")
