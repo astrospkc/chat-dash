@@ -51,4 +51,4 @@ export default tseslint.config({
 
 # CHAT-DASH APP
 
-![THE CHAT PAGE]("C:\Users\Asus\Documents\punam\chatApp.png")
+![THE CHAT PAGE]("chatApp.png")
