@@ -33,6 +33,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
     const { selectedChat, user, setSelectedChat } = ChatState()
     ////console.log"selectedChat in updategroupchatmodel: ", selectedChat)
     const groupName = selectedChat?.chatName && selectedChat?.chatName.toUpperCase()
+    console.log(search)
     //console.log"search: ", search)
 
     const handleRemove = async (user1: UserType) => {
