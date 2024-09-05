@@ -31,12 +31,12 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
     const [loading, setLoading] = useState(false)
     const [renameLoading, setRenameLoading] = useState(false)
     const { selectedChat, user, setSelectedChat } = ChatState()
-    //console.log("selectedChat in updategroupchatmodel: ", selectedChat)
+    ////console.log"selectedChat in updategroupchatmodel: ", selectedChat)
     const groupName = selectedChat?.chatName && selectedChat?.chatName.toUpperCase()
-    console.log("search: ", search)
+    //console.log"search: ", search)
 
     const handleRemove = async (user1: UserType) => {
-        //console.log("user1 to remove: ", user1)
+        ////console.log"user1 to remove: ", user1)
         if (
             selectedChat &&
             selectedChat.groupAdmin &&
@@ -127,7 +127,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
                 })
             })
             const data = await res.json()
-            //console.log("data when adding: ", data)
+            ////console.log"data when adding: ", data)
             setSelectedChat(data)
             setFetchAgain(!fetchAgain)
             setLoading(false)
@@ -176,7 +176,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
     }
 
     const handleSearch = async (value: string) => {
-        //console.log("value: ", value)
+        ////console.log"value: ", value)
         setSearch(value)
         if (!value) {
             return;
@@ -206,7 +206,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessage }: any) 
             setLoading(false)
         }
     }
-    //console.log("searcch result in update group modal: ", searchResult)
+    ////console.log"searcch result in update group modal: ", searchResult)
 
 
     return (

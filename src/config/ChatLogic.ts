@@ -3,8 +3,8 @@ import { UserType, MessageProps } from "../components/types/types"
 
 
 export const getSender = (loggedUser: UserType, users: UserType[]) => {
-    //console.log("loggedUser: ", loggedUser)
-    //console.log("users: ", users)
+    ////console.log"loggedUser: ", loggedUser)
+    ////console.log"users: ", users)
     if (users && loggedUser) {
         return users[0]?._id === loggedUser._id ? users[1]?.name : users[0]?.name
 
@@ -18,8 +18,8 @@ export const getSender = (loggedUser: UserType, users: UserType[]) => {
 
 
 export const getSenderFull = (loggedUser: UserType, users: UserType[]) => {
-    //console.log("loggedUser: ", loggedUser)
-    //console.log("users: ", users)
+    ////console.log"loggedUser: ", loggedUser)
+    ////console.log"users: ", users)
     if (users && loggedUser) {
         return users[0]?._id === loggedUser._id ? users[1] : users[0]
 

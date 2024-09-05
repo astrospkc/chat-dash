@@ -21,7 +21,7 @@ const Login = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(import.meta.env.VITE_URL, import.meta.env.KEY)
+        //console.logimport.meta.env.VITE_URL, import.meta.env.KEY)
         setLoginLoad(true)
         const res = await fetch(`${import.meta.env.VITE_URL}/api/users/login`, {
             method: "POST",
@@ -31,14 +31,14 @@ const Login = () => {
             body: JSON.stringify(input)
         })
         const data = await res.json();
-        //console.log("data: ", data)
+        ////console.log"data: ", data)
 
         if (data.status == 201) {
-            //console.log("data: ", data)
+            ////console.log"data: ", data)
 
         }
         if (data.success) {
-            //console.log("auth token: ", data.authtoken);
+            ////console.log"auth token: ", data.authtoken);
             localStorage.setItem("token", data.authtoken)
             alert("happy logged in ")
 
@@ -59,7 +59,7 @@ const Login = () => {
             setInput({ ...input, [target.name]: target.value });
         }
     };
-    console.log(import.meta.env.URL, import.meta.env.KEY)
+    //console.logimport.meta.env.URL, import.meta.env.KEY)
 
     return (
         <div className='flex  justify-center items-center w-full h-screen'>

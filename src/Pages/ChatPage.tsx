@@ -45,10 +45,10 @@ const ChatPage = () => {
         userInfo()
     }, [])
 
-    console.log("selectedChat: ", selectedChat)
+    //console.log"selectedChat: ", selectedChat)
 
 
-    //console.log("user: ", user)
+    ////console.log"user: ", user)
     return (
         <div className='h-screen'>
             {/* header */}

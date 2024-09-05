@@ -31,9 +31,9 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
     const [isTyping, setIsTyping] = useState(false);
     const toast = useToast();
 
-    console.log("selected Chat: ", selectedChat)
+    //console.log"selected Chat: ", selectedChat)
 
-    // //console.log("user: ", user)
+    // ////console.log"user: ", user)
 
 
     const handleBack = () => {
@@ -54,7 +54,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
             }
         })
 
-        console.log("selected Chat: after handlling back: ", selectedChat)
+        //console.log"selected Chat: after handlling back: ", selectedChat)
     };
 
     const fetchMessage = async () => {
@@ -86,7 +86,7 @@ const SingleChat: React.FC<SingleChatProps> = ({ fetchAgain, setFetchAgain }) =>
 
     useEffect(() => {
         socket = io(ENDPOINT);
-        //console.log("user for socket: ", user)
+        ////console.log"user for socket: ", user)
 
         socket.emit("setup", user);
 

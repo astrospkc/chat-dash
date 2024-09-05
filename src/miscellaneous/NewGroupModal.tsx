@@ -39,7 +39,7 @@ const NewGroupModal = () => {
                 })
 
                 const data = await res.json()
-                //console.log("data when searched for group: ", data)
+                ////console.log"data when searched for group: ", data)
                 setLoading(false)
                 setSearchResult(data)
             } catch (error) {
@@ -54,7 +54,7 @@ const NewGroupModal = () => {
     }
 
 
-    //console.log("search Result: ", searchResult, "selectedUser: ", selectedUser)
+    ////console.log"search Result: ", searchResult, "selectedUser: ", selectedUser)
     const handleSubmit = async () => {
         if (!groupChatName || !selectedUser) {
             toast({
@@ -79,7 +79,7 @@ const NewGroupModal = () => {
                 })
             })
             const data = await res.json()
-            //console.log("data: ", data)
+            ////console.log"data: ", data)
             setChats([data, ...chats])
             onClose()
             toast({

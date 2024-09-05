@@ -28,13 +28,13 @@ const SignUp = () => {
             body: JSON.stringify(input)
         })
         const data = await res.json();
-        //console.log("data: ", data)
+        ////console.log"data: ", data)
         if (data.status == 201) {
-            //console.log("data: ", data)
+            ////console.log"data: ", data)
 
         }
         if (data.success) {
-            //console.log("auth token: ", data.authToken);
+            ////console.log"auth token: ", data.authToken);
             localStorage.setItem("token", data.authToken)
             alert("happy signed in ")
             navigate("/chat")
@@ -60,7 +60,7 @@ const SignUp = () => {
     };
 
     const handleClick = () => {
-        //console.log("click the button")
+        ////console.log"click the button")
     }
     // const isError = input.name === "" || input.username === "" || input.email === "" || input.password === ""
 

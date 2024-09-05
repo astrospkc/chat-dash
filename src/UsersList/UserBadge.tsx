@@ -6,7 +6,7 @@ interface UserListItemProps {
     handleFn: () => void
 }
 const UserBadge: React.FC<UserListItemProps> = ({ user, handleFn }) => {
-    //console.log("user badge user: ", user)
+    ////console.log"user badge user: ", user)
     return (
         <div className='text-center bg-cyan-400 p-2 w-fit rounded-3xl flex flex-row gap-2 items-center' onClick={handleFn}>
             <div>{user.name}</div>

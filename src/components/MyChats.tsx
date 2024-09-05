@@ -21,8 +21,8 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
 
     const [loggedUser, setLoggedUser] = useState<UserType | undefined>(undefined)
     const { selectedChat, setSelectedChat, chats, setChats, user } = ChatState()
-    //console.log("user: ", user)
-    //console.log("selectedChat: ", selectedChat)
+    ////console.log"user: ", user)
+    ////console.log"selectedChat: ", selectedChat)
 
 
 
@@ -39,7 +39,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
                 // body: JSON.stringify(selected)
             })
             const data = await res.json()
-            console.log("data in myychats: ", data)
+            //console.log"data in myychats: ", data)
             setChats(data)
 
         } catch (error) {
@@ -63,11 +63,11 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
         setLoggedUser(user)
         fetchChats()
     }, [user, fetchAgain])
-    //console.log("logged user: ", loggedUser)
-    //console.log("chats: ", chats)
+    ////console.log"logged user: ", loggedUser)
+    ////console.log"chats: ", chats)
 
     // const RemoveUser = (chatId) => {
-    //     console.log("chatId clicked: ", chatId)
+    //     //console.log"chatId clicked: ", chatId)
     //     const chatToRemove = chats.findIndex(() => chats.includes(chatId))
     //     if (chatToRemove !== -1) {
     //         chats.splice(chatToRemove, 1)
@@ -79,7 +79,7 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
     //     setChats(chats)
     // }, [chats])
 
-    // console.log("chats in the my chats: ", chats)
+    // //console.log"chats in the my chats: ", chats)
 
 
     return (

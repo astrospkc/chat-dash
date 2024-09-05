@@ -40,12 +40,12 @@ const SearchDrawer = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef<HTMLButtonElement>(null)
 
-    console.log("selected chat in search drawer: ", selectedChat)
+    //console.log"selected chat in search drawer: ", selectedChat)
 
     const handleSearch = async () => {
-        //console.log("handling search")
+        ////console.log"handling search")
         const token = localStorage.getItem("token")
-        //console.log("token in search drawer: ", token)
+        ////console.log"token in search drawer: ", token)
         if (!token) {
             alert("token is not available , please login")
         }
@@ -73,7 +73,7 @@ const SearchDrawer = () => {
             })
 
             const data = await res.json()
-            //console.log("data when searched: ", data)
+            ////console.log"data when searched: ", data)
 
             if (chats.length > 0 && !chats.find((chat) => chat._id === data._id)) setChats([...chats, data])
             // if (chats.length == 0 && data) setChats([data])
@@ -99,7 +99,7 @@ const SearchDrawer = () => {
         }
 
     }
-    //console.log("chats while adding new chat: ", chats)
+    ////console.log"chats while adding new chat: ", chats)
 
 
     const accessChats = async (userId: string) => {
@@ -115,10 +115,10 @@ const SearchDrawer = () => {
                 body: JSON.stringify({ userId })
             })
             const data = await res.json()
-            console.log("user when selected from side drawer: ", data)
+            //console.log"user when selected from side drawer: ", data)
             // setSelectedChat(data)
             setChats([data, ...chats]) //experimentings
-            console.log("chts: ", chats)
+            //console.log"chts: ", chats)
             setLoadingChat(false)
             onClose()
 

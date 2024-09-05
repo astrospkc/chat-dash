@@ -47,7 +47,7 @@ const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         })
         const data = await res.json()
 
-        //console.log("userInfo: ", data)
+        ////console.log"userInfo: ", data)
         setUser(data)
     }
 
