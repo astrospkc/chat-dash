@@ -57,8 +57,6 @@ const ChatPage = () => {
                 <div className=' flex flex-row gap-2 items-center'>
                     <BsSearch className='text-xl font-bold' />
                     <h1 className='text-base md:text-xl font-semibold'>
-
-
                         <SearchDrawer /> </h1></div>
                 <div><h1 className='text-3xl font-bold'>CHAT-DASH</h1></div>
                 <div className='text-base md:text-xl font-semibold flex flex-row  gap-2 items-center'>

@@ -6,6 +6,8 @@ import { Stack, Text, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import ChatLoading from './ChatLoading'
 import { UserType } from './types/types'
+import axios from 'axios'
+
 // import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface MyChatsProps {
@@ -16,30 +18,27 @@ interface MyChatsProps {
 
 const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
 
-
-
-
     const [loggedUser, setLoggedUser] = useState<UserType | undefined>(undefined)
     const { selectedChat, setSelectedChat, chats, setChats, user } = ChatState()
-    ////console.log"user: ", user)
-    ////console.log"selectedChat: ", selectedChat)
-
 
 
     const toast = useToast()
+
+
     const fetchChats = async () => {
         try {
             const token = localStorage.getItem("token")
-            const res = await fetch(`${import.meta.env.VITE_URL}/api/chats/fetchChat`, {
-                method: "GET",
+            console.log("token: ", token)
+
+            const res = await axios.get(`${import.meta.env.VITE_URL}/api/chats/fetchChat`, {
                 headers: {
-                    // "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`
                 },
-                // body: JSON.stringify(selected)
+
             })
-            const data = await res.json()
-            //console.log"data in myychats: ", data)
+
+            const data = await res.data
+            console.log("data in myychats: ", data)
             setChats(data)
 
         } catch (error) {
@@ -54,9 +53,8 @@ const MyChats: React.FC<MyChatsProps> = ({ fetchAgain }) => {
 
     }
 
-    //user: {_id: '66c844030cf5028aba708139', name: 'rita', username: '@rita', email: 'rita@gmail.com', pic: 'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg', …}
 
-    // if this is the user I am getting then why the setLoggedUser is not updating with this value, -> ans-> in dependency array , put the user in it.
+
 
     useEffect(() => {
 

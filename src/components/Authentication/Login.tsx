@@ -1,103 +1,97 @@
-
-
+import axios from "axios"
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
+import Button from "../UIComponent/Button"
 
-interface InputState {
-    pic?: File | null;
-    username: string;
-    password: string
-}
+
 const Login = () => {
     const navigate = useNavigate()
-    const [loginLoad, setLoginLoad] = useState(false)
-    const [input, setInput] = useState<InputState>({
-        pic: null,
+
+    const [user, setUser] = useState({
         username: "@rita",
-
-        password: "rita@",
-
+        password: "rita@"
     })
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        //console.logimport.meta.env.VITE_URL, import.meta.env.KEY)
+    const [loginLoad, setLoginLoad] = useState(false)
+    const handleSubmit = async () => {
         setLoginLoad(true)
-        const res = await fetch(`${import.meta.env.VITE_URL}/api/users/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(input)
-        })
-        const data = await res.json();
-        ////console.log"data: ", data)
+        const url = `${import.meta.env.VITE_URL}/api/users/login}`
+        // console.log(url)
+        // 
+        const res = await axios.post(url, {
+            username: user.username,
+            password: user.password
+        },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
 
-        if (data.status == 201) {
-            ////console.log"data: ", data)
+        )
 
-        }
+        const data = res.data
+        console.log(data)
         if (data.success) {
-            ////console.log"auth token: ", data.authtoken);
+            setUser(data)
+            // console.log("token while login: ", data.authtoken)
             localStorage.setItem("token", data.authtoken)
-            alert("happy logged in ")
-
+            alert("happy login")
             navigate("/chat")
+
         } else {
             alert("invalid credentials")
         }
         setLoginLoad(false)
+
     }
 
-    // const [pic , setPic] = useState()
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+    }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const target = e.target;
-        if (target.name === 'pic' && target.files) {
-            setInput({ ...input, [target.name]: target.files[0] });
-        } else {
-            setInput({ ...input, [target.name]: target.value });
-        }
-    };
-    //console.logimport.meta.env.URL, import.meta.env.KEY)
+    if (loginLoad) {
+        return (
+            <div className="w-full h-full flex items-center  justify-center bg-black ">
+                <div className="text-white">
+                    ......loading
+                </div>
+            </div>
+        )
+    }
+
+    const handleSignup = () => {
+        navigate("/signup")
+    }
+
 
     return (
-        <div className='flex  justify-center items-center w-full h-screen'>
-
-            <div>
-                <h1 className='text-white text-3xl'>Chat-Dash</h1>
-                <form action="submit" onSubmit={handleSubmit}>
-                    {loginLoad && <div className='text-white'>...loading , Please wait for sometime , it takes time</div>}
-                    <div className='my-4'>
-                        <label htmlFor="name" className='my-3 text-white'>Username</label>
-                        <input type="text" name='username' onChange={handleInputChange} value={input.username} defaultValue='@rita' className='text-black p-3 w-full' />
+        <div className='flex flex-col justify-center items-center m-auto h-screen w-full'>
+            {/* username, password */}
+            <div className="text-4xl my-4 font-bold text-white barrio-regular">Login</div>
+            <div className='bg-gradient-to-t from-blue-400 to bg-cyan-950 p-10 flex flex-col rounded-xl gap-4 items-start '>
+                <div className='p-4  flex flex-col'>
+                    <label htmlFor="" className='text-xl font-bold text-white mb-4'>Username</label>
+                    <input type="text" className='p-3 rounded-xl ' name="username" defaultValue={user.username} onChange={handleChange} />
+                </div>
+                <div className='flex flex-col p-4'>
+                    <label htmlFor="password" className='text-xl font-bold text-white mb-4'>Passowrd</label>
+                    <input type="password" className='p-3 rounded-xl' name="password" defaultValue={user.password} onChange={handleChange} />
+                </div>
+                <div className='flex flex-col w-full items-center'>
+                    <Button onclick={handleSubmit}>Submit</Button>
+                    <div className="flex items-center gap-4">
+                        <div className="text-xl font-bold border-b-2 border-black">
+                            Create new account
+                        </div>
+                        <Button onclick={handleSignup}>Sign up</Button>
                     </div>
 
-                    <div className='my-4'>
-                        <label htmlFor="name" className='my-3 text-white'>Password</label>
-                        <input type="password" name='password' onChange={handleInputChange} value={input.password} defaultValue='rita@' className='p-3 w-full' />
-                    </div>
-                    <button className='my-3 p-3 w-fit border-2 border-white text-white' type='submit'>
-                        Submit
-
-                    </button>
-                </form>
-                <h1 className='text-white'>Create Account</h1>
-                <Link to="/signup">
-                    <button className='my-3 p-3 w-fit border-2 border-white text-white' >
-                        Sign Up
-
-                    </button>
-                </Link>
+                </div>
 
 
             </div>
 
-
-
-
         </div>
-
     )
 }
 

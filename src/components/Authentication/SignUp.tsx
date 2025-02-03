@@ -1,4 +1,5 @@
 
+import axios from 'axios';
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 interface SignInputState {
@@ -10,7 +11,7 @@ interface SignInputState {
 }
 const SignUp = () => {
     const navigate = useNavigate()
-    const [input, setInput] = useState<SignInputState>({
+    const [user, setUser] = useState<SignInputState>({
         name: "",
         username: "",
         email: "",
@@ -20,20 +21,27 @@ const SignUp = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const res = await fetch(`${import.meta.env.VITE_URL}/api/users/register`, {
-            method: "POST",
+        const url = `${import.meta.env.VITE_URL}/api/users/register`
+        // 
+        const res = await axios.post(url, {
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            password: user.password
+        }, {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(input)
+
         })
-        const data = await res.json();
+        const data = res.data;
         ////console.log"data: ", data)
         if (data.status == 201) {
             ////console.log"data: ", data)
 
         }
         if (data.success) {
+            setUser(data)
             ////console.log"auth token: ", data.authToken);
             localStorage.setItem("token", data.authToken)
             alert("happy signed in ")
@@ -56,7 +64,7 @@ const SignUp = () => {
     // };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInput({ ...input, [e.target.name]: e.target.value });
+        setUser({ ...user, [e.target.name]: e.target.value });
     };
 
     const handleClick = () => {
@@ -69,8 +77,19 @@ const SignUp = () => {
     // }
 
     return (
-        <div className='flex  justify-center items-center w-full h-screen'>
-            <div>
+        <div className='flex flex-col  justify-center items-center w-full h-screen'>
+            <div className='flex flex-row  items-center gap-4 my-2'>
+                <Link to="/">
+                    <div className='text-white rounded-full w-fit border-2 border-white p-3 hover:cursor-pointer hover:border-gray-500 hover:bg-black'>
+                        home
+                    </div>
+                </Link>
+                <div className='barrio-regular text-4xl my-3 text-white'>
+                    Sign Up
+                </div>
+            </div>
+
+            <div className='border-2 border-gray-600 p-4 rounded-xl bg-gradient-to-b from-cyan-800 to-black shadow-xl shadow-cyan-600'>
                 <h1 className='text-white text-3xl'>Chat-Dash</h1>
                 <form action="submit" onSubmit={handleSubmit}>
                     <div className='my-4'>
@@ -101,9 +120,6 @@ const SignUp = () => {
 
                     </button>
                 </Link>
-
-
-
 
             </div>
 

@@ -45,7 +45,7 @@ const SearchDrawer = () => {
     const handleSearch = async () => {
         ////console.log"handling search")
         const token = localStorage.getItem("token")
-        ////console.log"token in search drawer: ", token)
+        console.log(token)
         if (!token) {
             alert("token is not available , please login")
         }
@@ -135,6 +135,11 @@ const SearchDrawer = () => {
         }
     }
 
+    const handleinputsearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
+        setSearch(e.target.value)
+    }
+
     return (
         <>
             <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
@@ -152,7 +157,7 @@ const SearchDrawer = () => {
                     <DrawerHeader>Search user</DrawerHeader>
 
                     <DrawerBody>
-                        <Input placeholder='Search by name or email' value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <Input placeholder='Search by name or email' onChange={handleinputsearch} />
                         <Button colorScheme='blue' onClick={handleSearch}>Go</Button>
 
                         {loading ? (
