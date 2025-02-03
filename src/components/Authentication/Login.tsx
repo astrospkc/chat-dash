@@ -14,7 +14,7 @@ const Login = () => {
     const [loginLoad, setLoginLoad] = useState(false)
     const handleSubmit = async () => {
         setLoginLoad(true)
-        const url = `${import.meta.env.VITE_URL}/api/users/login}`
+        const url = `${import.meta.env.VITE_URL}/api/users/login`
         // console.log(url)
         // 
         const res = await axios.post(url, {
